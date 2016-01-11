@@ -1,0 +1,9 @@
+Partners: Daniel Lee & Yang Pan
+
+
+This program takes in 1-2 commandline arguments as input.
+	The first commandline argument is required and specifies which json file to read from to perform statistical computations.
+
+	The second commandline argument is optional.  If given, it will be the file name that will be created where the output stats will be written to.  If it is not given, then the output stats will simply be written to the terminal.
+
+	
