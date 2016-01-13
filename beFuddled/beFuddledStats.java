@@ -447,10 +447,13 @@ class beFuddledStats {
 							break;
 					}
 
+					if (args.length > 1) {
+						FileWriter writer = new FileWriter(new File(args[1]));
+						JSONObject result = resultJSON(moveHistogram, top10Locations, top10LocFreq);
+						writer.write(result.toString(2));
+					}
 
-					JSONObject result = resultJSON(moveHistogram, top10Locations, top10LocFreq);
-
-					System.out.println(result.toString(2));
+					
 
 				}
 				else {
