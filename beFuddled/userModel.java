@@ -10,10 +10,7 @@ public class userModel {
 
 	public userModel(String id) {
 		userId = id;
-		gamesStarted = 1;
-		gamesCompleted = 0;
-		gamesWon = 0;
-		gamesLoss = 0;
+		gamesStarted = gamesCompleted = gamesWon = gamesLoss = 0;
 
 	}
 
