@@ -1,0 +1,98 @@
+{
+  "averageNumChars": 89.57338,
+  "allAvgLengthHistogram": {
+    "words": 265975,
+    "stdDevWords": 5.501218388447326,
+    "stdDevChars": 46.07435446985015,
+    "chars": 2165828
+  },
+  "numMessagesByLengthHistogram": {
+    "11": 5160,
+    "12": 5145,
+    "13": 5346,
+    "14": 5294,
+    "15": 5256,
+    "16": 5251,
+    "17": 5313,
+    "18": 5289,
+    "19": 5245,
+    "2": 5263,
+    "3": 5356,
+    "4": 5257,
+    "5": 5288,
+    "6": 5142,
+    "7": 5395,
+    "8": 5206,
+    "9": 5243,
+    "20": 5261,
+    "10": 5290
+  },
+  "protectedAvgLengthHistogram": {
+    "words": 217500,
+    "stdDevWords": 5.4383374754576765,
+    "stdDevChars": 45.599035889147125,
+    "chars": 1770007
+  },
+  "stdDevWords": 5.4834565054899445,
+  "numMessagesByResponseHistogram": {
+    "in-response": 20049,
+    "original": 79951
+  },
+  "stdDevChars": 45.93755452106262,
+  "userAvgLengthHistogram": {
+    "words": 296967,
+    "stdDevWords": 5.4545341059346635,
+    "stdDevChars": 45.70024731280881,
+    "chars": 2419184
+  },
+  "totalUniqueUsers": 10000,
+  "numMessagesByStatusHistogram": {
+    "private": 19937,
+    "public": 60336,
+    "protected": 19727
+  },
+  "privateAvgLengthHistogram": {
+    "words": 219214,
+    "stdDevWords": 5.4542218691760445,
+    "stdDevChars": 45.67274531105058,
+    "chars": 1785427
+  },
+  "publicAvgLengthHistogram": {
+    "words": 663068,
+    "stdDevWords": 5.507699137884054,
+    "stdDevChars": 46.13454979519899,
+    "chars": 5401904
+  },
+  "averageNumWords": 10.99782,
+  "in-responseAvgLengthHistogram": {
+    "words": 219131,
+    "stdDevWords": 5.47046955588538,
+    "stdDevChars": 45.883197732041836,
+    "chars": 1785201
+  },
+  "subscribersAvgLengthHistogram": {
+    "words": 414481,
+    "stdDevWords": 5.496987622998739,
+    "stdDevChars": 46.03196191133819,
+    "chars": 3375426
+  },
+  "originalAvgLengthHistogram": {
+    "words": 880651,
+    "stdDevWords": 5.486576016975949,
+    "stdDevChars": 45.950211223630625,
+    "chars": 7172137
+  },
+  "totalMessages": 100000,
+  "selfAvgLengthHistogram": {
+    "words": 122359,
+    "stdDevWords": 5.468275875765777,
+    "stdDevChars": 45.88880835164114,
+    "chars": 996900
+  },
+  "numMessagesByRecepientHistogram": {
+    "all": 24199,
+    "subscribers": 37725,
+    "self": 11155,
+    "user": 26921
+  }
+}
