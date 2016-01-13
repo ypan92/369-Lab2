@@ -119,7 +119,8 @@ public class thghtShreStats {
             responses[responseIndex].sumCharsSquares += numChars * numChars;
             responses[responseIndex].totalMessages++;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("JSON format is not correct. JSON object was not a ThghtShre log record.");
+            System.exit(1);
         }
     }
 
@@ -371,6 +372,11 @@ public class thghtShreStats {
     }
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Not enough commandline-arguments.");
+            System.out.println("correct format: java -cp .:org.json-20120521.jar [.json file] [optional output file name]");
+            System.exit(1);
+        }
         try {
             JSONTokener tokenizer = new JSONTokener(new FileReader(new File(args[0])));
 
