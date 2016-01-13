@@ -297,6 +297,32 @@ public class thghtShreStats {
         }
     }
 
+    private static void createCondHist(String type, int index) {
+        try {
+            JSONObject object = new JSONObject();
+            object.put("numAllRecepients", statuses[index].numAllRcps);
+            object.put("numSubRecepients", statuses[index].numSubRcps);
+            object.put("numUserRecepients", statuses[index].numUserRcps);
+            object.put("numSelfRecepients", statuses[index].numSelfRcps);
+            statsObject.put(type + "RecepientsHistogram", object);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void createResponseHist(String type, long numResponses, long numOriginals) {
+        try {
+            JSONObject object = new JSONObject();
+            object.put("in-response", numResponses);
+            object.put("original", numOriginals);
+            statsObject.put(type + "ResponseHistogram", object);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void buildJSONObj() {
         JSONObject temp;
 
@@ -338,6 +364,10 @@ public class thghtShreStats {
                 createHistObj(statusNames[i], statuses[i].totalWords, statuses[i].totalChars,
                     statuses[i].totalMessages, statuses[i].sumWordsSquares,
                     statuses[i].sumCharsSquares);
+                createCondHist(statusNames[i], i);
+                createResponseHist(statusNames[i], statuses[i].numResponse,
+                    (statuses[i].totalMessages - statuses[i].numResponse));
+                    
             }
 
             String[] recepientNames = {"all", "subscribers", "user", "self"};
@@ -345,6 +375,8 @@ public class thghtShreStats {
                 createHistObj(recepientNames[i], recepients[i].totalWords, recepients[i].totalChars,
                     recepients[i].totalMessages, recepients[i].sumWordsSquares,
                     recepients[i].sumCharsSquares);
+                createResponseHist(recepientNames[i], recepients[i].numResponse,
+                    (recepients[i].totalMessages - recepients[i].numResponse));
             }
 
             String[] responseNames = {"in-response", "original"};
