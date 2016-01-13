@@ -342,12 +342,10 @@ class beFuddledStats {
 				if (srcFile.exists() && !srcFile.isDirectory()) {
 
 					JSONTokener tokenizer = new JSONTokener(new FileReader(srcFile));
-					JSONArray jsonArr = new JSONArray(tokenizer);
-
-					for (int jsonCount = 0; jsonCount < jsonArr.length(); ++jsonCount) {
-
-						
-						JSONObject parsedJSON = jsonArr.getJSONObject(jsonCount);
+                                        while (tokenizer.more()) {
+                                            try {
+						tokenizer.skipTo('{');
+						JSONObject parsedJSON = new JSONObject(tokenizer);
 						boolean isValidJSON = checkJSONValidity(parsedJSON);
 
 						if (isValidJSON) {
@@ -356,7 +354,7 @@ class beFuddledStats {
 							JSONObject actionObj = (JSONObject)parsedJSON.get("action");
 							String userId = parsedJSON.get("user").toString();
 
-							//updateStats(gameId, actionObj, userId);
+							updateStats(gameId, actionObj, userId);
 
 						}
 						else {
@@ -364,7 +362,10 @@ class beFuddledStats {
 							System.out.println("Please make sure the input file is for beFuddled JSON objects.");
 							break;
 						}
-
+                                            }
+                                            catch (Exception e) {
+                                                break;
+                                            }
 					}
 
 					ArrayList<Integer> moveHistogram = getMoveHistogram();

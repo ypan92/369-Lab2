@@ -1,144 +1,144 @@
 {
   "privateResponseHistogram": {
-    "in-response": 3983,
-    "original": 15954
+    "in-response": 40127,
+    "original": 160330
   },
   "numMessagesByResponseHistogram": {
-    "in-response": 20049,
-    "original": 79951
+    "in-response": 200087,
+    "original": 799913
   },
   "privateAvgLengthHistogram": {
-    "words": 219214,
-    "stdDevWords": 5.4542218691760445,
-    "stdDevChars": 45.67274531105058,
-    "chars": 1785427
+    "words": 2205133,
+    "stdDevWords": 5.477988738189722,
+    "stdDevChars": 45.907317495977374,
+    "chars": 17963480
   },
   "in-responseAvgLengthHistogram": {
-    "words": 219131,
-    "stdDevWords": 5.47046955588538,
-    "stdDevChars": 45.883197732041836,
-    "chars": 1785201
+    "words": 2204581,
+    "stdDevWords": 5.469649703942098,
+    "stdDevChars": 45.844778059641214,
+    "chars": 17952156
   },
   "originalAvgLengthHistogram": {
-    "words": 880651,
-    "stdDevWords": 5.486576016975949,
-    "stdDevChars": 45.950211223630625,
-    "chars": 7172137
+    "words": 8791495,
+    "stdDevWords": 5.4805661160031285,
+    "stdDevChars": 45.92558009052182,
+    "chars": 71596385
   },
   "publicResponseHistogram": {
-    "in-response": 12104,
-    "original": 48232
+    "in-response": 119868,
+    "original": 480048
   },
   "selfAvgLengthHistogram": {
-    "words": 122359,
-    "stdDevWords": 5.468275875765777,
-    "stdDevChars": 45.88880835164114,
-    "chars": 996900
+    "words": 1211859,
+    "stdDevWords": 5.470822145112421,
+    "stdDevChars": 45.80901209096441,
+    "chars": 9865080
   },
   "numMessagesByRecepientHistogram": {
-    "all": 24199,
-    "subscribers": 37725,
-    "self": 11155,
-    "user": 26921
+    "all": 238996,
+    "subscribers": 380596,
+    "self": 110386,
+    "user": 270022
   },
   "protectedRecepientsHistogram": {
-    "numUserRecepients": 2983,
-    "numSubRecepients": 13758,
+    "numUserRecepients": 30035,
+    "numSubRecepients": 139671,
     "numAllRecepients": 0,
-    "numSelfRecepients": 2986
+    "numSelfRecepients": 29921
   },
-  "averageNumChars": 89.57338,
+  "averageNumChars": 89.548541,
   "userResponseHistogram": {
-    "in-response": 5502,
-    "original": 21419
+    "in-response": 54130,
+    "original": 215892
   },
   "allAvgLengthHistogram": {
-    "words": 265975,
-    "stdDevWords": 5.501218388447326,
-    "stdDevChars": 46.07435446985015,
-    "chars": 2165828
+    "words": 2632762,
+    "stdDevWords": 5.472448749465643,
+    "stdDevChars": 45.861554596364314,
+    "chars": 21438307
   },
   "privateRecepientsHistogram": {
-    "numUserRecepients": 17864,
+    "numUserRecepients": 180212,
     "numSubRecepients": 0,
     "numAllRecepients": 0,
-    "numSelfRecepients": 2073
+    "numSelfRecepients": 20245
   },
   "numMessagesByLengthHistogram": {
-    "11": 5160,
-    "12": 5145,
-    "13": 5346,
-    "14": 5294,
-    "15": 5256,
-    "16": 5251,
-    "17": 5313,
-    "18": 5289,
-    "19": 5245,
-    "2": 5263,
-    "3": 5356,
-    "4": 5257,
-    "5": 5288,
-    "6": 5142,
-    "7": 5395,
-    "8": 5206,
-    "9": 5243,
-    "20": 5261,
-    "10": 5290
+    "11": 52454,
+    "12": 52284,
+    "13": 52514,
+    "14": 52349,
+    "15": 52452,
+    "16": 52974,
+    "17": 52196,
+    "18": 52686,
+    "19": 52555,
+    "2": 52564,
+    "3": 52784,
+    "4": 52386,
+    "5": 52578,
+    "6": 52993,
+    "7": 52921,
+    "8": 53031,
+    "9": 52690,
+    "20": 52885,
+    "10": 52704
   },
   "protectedAvgLengthHistogram": {
-    "words": 217500,
-    "stdDevWords": 5.4383374754576765,
-    "stdDevChars": 45.599035889147125,
-    "chars": 1770007
+    "words": 2194019,
+    "stdDevWords": 5.4783002492520305,
+    "stdDevChars": 45.89139010721023,
+    "chars": 17867040
   },
-  "stdDevWords": 5.4834565054899445,
-  "stdDevChars": 45.93755452106262,
+  "stdDevWords": 5.478394710334769,
+  "stdDevChars": 45.90950576701212,
   "userAvgLengthHistogram": {
-    "words": 296967,
-    "stdDevWords": 5.4545341059346635,
-    "stdDevChars": 45.70024731280881,
-    "chars": 2419184
+    "words": 2970065,
+    "stdDevWords": 5.483784615780944,
+    "stdDevChars": 45.94471054847507,
+    "chars": 24191661
   },
   "allResponseHistogram": {
-    "in-response": 4793,
-    "original": 19406
+    "in-response": 47983,
+    "original": 191013
   },
   "totalUniqueUsers": 10000,
   "numMessagesByStatusHistogram": {
-    "private": 19937,
-    "public": 60336,
-    "protected": 19727
+    "private": 200457,
+    "public": 599916,
+    "protected": 199627
   },
   "publicAvgLengthHistogram": {
-    "words": 663068,
-    "stdDevWords": 5.507699137884054,
-    "stdDevChars": 46.13454979519899,
-    "chars": 5401904
+    "words": 6596924,
+    "stdDevWords": 5.47856025927491,
+    "stdDevChars": 45.916240247400566,
+    "chars": 53718021
   },
-  "averageNumWords": 10.99782,
+  "averageNumWords": 10.996076,
   "protectedResponseHistogram": {
-    "in-response": 3962,
-    "original": 15765
+    "in-response": 40092,
+    "original": 159535
   },
   "publicRecepientsHistogram": {
-    "numUserRecepients": 6074,
-    "numSubRecepients": 23967,
-    "numAllRecepients": 24199,
-    "numSelfRecepients": 6096
+    "numUserRecepients": 59775,
+    "numSubRecepients": 240925,
+    "numAllRecepients": 238996,
+    "numSelfRecepients": 60220
   },
   "subscribersAvgLengthHistogram": {
-    "words": 414481,
-    "stdDevWords": 5.496987622998739,
-    "stdDevChars": 46.03196191133819,
-    "chars": 3375426
+    "words": 4181390,
+    "stdDevWords": 5.480454934377051,
+    "stdDevChars": 45.94338045159649,
+    "chars": 34053493
   },
   "selfResponseHistogram": {
-    "in-response": 2244,
-    "original": 8911
+    "in-response": 22099,
+    "original": 88287
   },
-  "totalMessages": 100000,
+  "totalMessages": 1000000,
   "subscribersResponseHistogram": {
-    "in-response": 7510,
-    "original": 30215
+    "in-response": 75875,
+    "original": 304721
   }
 }
