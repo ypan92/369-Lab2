@@ -19,6 +19,9 @@ class beFuddledStats {
 	private static locationStats locStats = new locationStats();
 	private static userStats usrStats = new userStats();
 
+	private static int longestGameMoves = 0;
+	private static String longestGameMovesUser;
+
 
 	public static boolean checkJSONValidity(JSONObject objToCheck) {
 
@@ -37,18 +40,18 @@ class beFuddledStats {
 
 	}
 
-	public static Point extractLocation(JSONObject locObj) {
+	public static String extractLocation(JSONObject locObj) {
 
 		try {
 			int x = (Integer)locObj.get("x");
 			int y = (Integer)locObj.get("y");
-			return new Point(x, y);
+			return "" + x + "," + y;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return new Point(0, 0);
+		return "";
 
 	}
 
@@ -84,11 +87,12 @@ class beFuddledStats {
 					break;
 				case "Move":
 					JSONObject locObj = (JSONObject)actionObj.get("location");
-					Point location = extractLocation(locObj);
+					String location = extractLocation(locObj);
 					
 					if (locStats.locationFrequencies.containsKey(location)) {
 						int occurrence = locStats.locationFrequencies.get(location);
 						occurrence += 1;
+						locStats.locationFrequencies.put(location, occurrence);
 					}
 					else {
 						locStats.locationFrequencies.put(location, 1);
@@ -165,6 +169,11 @@ class beFuddledStats {
 					}
 					else {
 						gamesByMoveCount.put(actionNum, 1);
+					}
+
+					if (actionNum > longestGameMoves) {
+						longestGameMoves = actionNum;
+						longestGameMovesUser = userId;
 					}
 
 					break;
@@ -248,6 +257,14 @@ class beFuddledStats {
 
 		for (userModel model : userCollection.values()) {
 
+			if (model.gamesStarted > 0) {
+				usrStats.totalStarters += 1;
+			}
+
+			if (model.gamesCompleted > 0) {
+				usrStats.totalCompleters += 1;
+			}
+
 			if (model.gamesStarted == usrStats.largestStarts) {
 				usrStats.largestStartIds.add(model.userId);
 			}
@@ -287,8 +304,18 @@ class beFuddledStats {
 
 	}
 
+	private static String convertArrayListToString(ArrayList<String> userIds) {
+		String result = "";
 
-	public static JSONObject resultJSON(ArrayList<Integer> moveHistogram) {
+		for (String s : userIds) {
+			result += s + ", ";
+		}
+
+		return result.substring(0, result.length() - 2);
+	}
+
+
+	public static JSONObject resultJSON(ArrayList<Integer> moveHistogram, ArrayList<String> top10Locations, ArrayList<Integer> top10LocFreq) {
 
 		JSONObject result = new JSONObject();
 		try {
@@ -318,7 +345,37 @@ class beFuddledStats {
 
 			result.put("Moves Per Game Histogram", moveHistogramChart);
 
-			//result.put("")             
+			result.put("Total Users Who Started A Game", usrStats.totalStarters);
+			result.put("Total Users Who Completed A Game", usrStats.totalCompleters);
+			result.put("Largest Number of Games Started By A User", usrStats.largestStarts);
+			result.put("Largest Number of Games Completed By A User", usrStats.largestCompletes);
+			result.put("Largest Number of Wins a User Had", usrStats.largestWins);
+			result.put("Largest Number of Losses a User Had", usrStats.largestLosses);
+
+			result.put("User Who Played The Longest Game", longestGameMovesUser);
+			result.put("User(s) Who Started the Largest Number of Games", convertArrayListToString(usrStats.largestStartIds));
+			result.put("User(s) Who Completed the Largest Number of Games", convertArrayListToString(usrStats.largestCompleteIds));
+			result.put("User(s) Who Won the Most Games", convertArrayListToString(usrStats.largestWinIds));
+			result.put("User(s) Who Loss the Most Games", convertArrayListToString(usrStats.largestLossIds));
+
+			JSONObject locationHistogram = new JSONObject();
+			int ndx = 0;
+			for (String loc : top10Locations) {
+				String x = loc.substring(0, loc.indexOf(','));
+				String y = loc.substring(loc.indexOf(','), loc.length());
+				locationHistogram.put("[" + x + ", " + y + "]", top10LocFreq.get(ndx));
+				ndx += 1;
+			}
+			result.put("Histogram of Moves", locationHistogram);
+
+			JSONObject specialMoveHistogram = new JSONObject();
+			specialMoveHistogram.put("Rotate", actionStats.rotateCount);
+			specialMoveHistogram.put("Shuffle", actionStats.shuffleCount);
+			specialMoveHistogram.put("Clear", actionStats.clearCount);
+			specialMoveHistogram.put("Invert", actionStats.invertCount);
+
+			result.put("Historgram of Special Moves", specialMoveHistogram);
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -342,34 +399,56 @@ class beFuddledStats {
 				if (srcFile.exists() && !srcFile.isDirectory()) {
 
 					JSONTokener tokenizer = new JSONTokener(new FileReader(srcFile));
-                                        while (tokenizer.more()) {
-                                            try {
-						tokenizer.skipTo('{');
-						JSONObject parsedJSON = new JSONObject(tokenizer);
-						boolean isValidJSON = checkJSONValidity(parsedJSON);
+	                while (tokenizer.more()) {
+	                    try {
+							tokenizer.skipTo('{');
+							JSONObject parsedJSON = new JSONObject(tokenizer);
+							boolean isValidJSON = checkJSONValidity(parsedJSON);
 
-						if (isValidJSON) {
+							if (isValidJSON) {
 
-							int gameId = (Integer)parsedJSON.get("game");
-							JSONObject actionObj = (JSONObject)parsedJSON.get("action");
-							String userId = parsedJSON.get("user").toString();
+								int gameId = (Integer)parsedJSON.get("game");
+								JSONObject actionObj = (JSONObject)parsedJSON.get("action");
+								String userId = parsedJSON.get("user").toString();
 
-							updateStats(gameId, actionObj, userId);
+								updateStats(gameId, actionObj, userId);
 
-						}
-						else {
-							System.out.println("The supplied JSON file is malformatted.");
-							System.out.println("Please make sure the input file is for beFuddled JSON objects.");
-							break;
-						}
-                                            }
-                                            catch (Exception e) {
-                                                break;
-                                            }
+							}
+							else {
+								System.out.println("The supplied JSON file is malformatted.");
+								System.out.println("Please make sure the input file is for beFuddled JSON objects.");
+								break;
+							}
+	                    }
+	                    catch (Exception e) {
+	                        break;
+	                    }
 					}
 
 					ArrayList<Integer> moveHistogram = getMoveHistogram();
-					JSONObject result = resultJSON(moveHistogram);
+					computeUserStats();
+
+					HashMap sortedLocations = locStats.getSortedLocations();
+					ArrayList<String> top10Locations = new ArrayList<String>();
+					int count = 0;
+					for (Object key : sortedLocations.keySet()) {
+						top10Locations.add(key.toString());
+						count += 1;
+						if (count == 10)
+							break;
+					}
+
+					ArrayList<Integer> top10LocFreq = new ArrayList<Integer>();
+					count = 0;
+					for (Object value : sortedLocations.values()) {
+						top10LocFreq.add((Integer)value);
+						count += 1;
+						if (count == 10)
+							break;
+					}
+
+
+					JSONObject result = resultJSON(moveHistogram, top10Locations, top10LocFreq);
 
 					System.out.println(result.toString(2));
 
