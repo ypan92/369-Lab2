@@ -314,6 +314,72 @@ class beFuddledStats {
 		return result.substring(0, result.length() - 2);
 	}
 
+	public static void printResults(ArrayList<Integer> moveHistogram, ArrayList<String> top10Locations, ArrayList<Integer> top10LocFreq) {
+
+		System.out.println("\nTotal Games Seen: " + pointsStats.gamesStarted);
+		System.out.println("Total Completed Games: " + pointsStats.gamesCompleted);
+		System.out.println("Average Points Per Game: " +  pointsStats.getTotalAvg());
+		System.out.println("Standard Deviation for Points Per Game: " + pointsStats.getTotalStdDev());
+		System.out.println("Average Points Per Win Game: " + pointsStats.getWinAvg());
+		System.out.println("Standard Deviation for Points Per Win Game: " + pointsStats.getWinStdDev());
+		System.out.println("Average Points Per Loss Game: " + pointsStats.getLossAvg());
+		System.out.println("Standard Deviation for Points Per Loss Game: " + pointsStats.getLossStdDev());
+		System.out.println("Average Moves Per Game: " + actionStats.getTotalAvg());
+		System.out.println("Standard Deviation of Moves Per Game: " + actionStats.getTotalStdDev());
+		System.out.println("Average Moves Per Win Game: " + actionStats.getWinAvg());
+		System.out.println("Standard Deviation of Moves Per Win Game: " + actionStats.getWinStdDev());
+		System.out.println("Average Moves Per Loss Game: " + actionStats.getLossAvg());
+		System.out.println("Standard Deviation of Moves Per Loss Game: " + actionStats.getLossStdDev());
+		
+		try {
+			JSONObject moveHistogramChart = new JSONObject();
+			moveHistogramChart.put("[0,15]", moveHistogram.get(0));
+			moveHistogramChart.put("[15,30]", moveHistogram.get(1));
+			moveHistogramChart.put("[30,40]", moveHistogram.get(2));
+			moveHistogramChart.put("[40,50]", moveHistogram.get(3));
+			moveHistogramChart.put("[50,60]", moveHistogram.get(4));
+			moveHistogramChart.put("[60,80]", moveHistogram.get(5));
+			moveHistogramChart.put("[80+]", moveHistogram.get(6));
+
+			System.out.println("Moves Per Game Histogram: " + moveHistogramChart.toString(2));
+
+			System.out.println("Total Users Who Started A Game: " + usrStats.totalStarters);
+			System.out.println("Total Users Who Completed A Game: " + usrStats.totalCompleters);
+			System.out.println("Largest Number of Games Started By A User: " + usrStats.largestStarts);
+			System.out.println("Largest Number of Games Completed By A User: " + usrStats.largestCompletes);
+			System.out.println("Largest Number of Wins a User Had: " + usrStats.largestWins);
+			System.out.println("Largest Number of Losses a User Had: " + usrStats.largestLosses);
+
+			System.out.println("User Who Played The Longest Game: " + longestGameMovesUser);
+			System.out.println("\nUser(s) Who Started the Largest Number of Games: \n" + convertArrayListToString(usrStats.largestStartIds));
+			System.out.println("\nUser(s) Who Completed the Largest Number of Games: \n" + convertArrayListToString(usrStats.largestCompleteIds));
+			System.out.println("\nUser(s) Who Won the Most Games: \n" + convertArrayListToString(usrStats.largestWinIds));
+			System.out.println("\nUser(s) Who Loss the Most Games: \n" + convertArrayListToString(usrStats.largestLossIds));
+
+			JSONObject locationHistogram = new JSONObject();
+			int ndx = 0;
+			for (String loc : top10Locations) {
+				String x = loc.substring(0, loc.indexOf(','));
+				String y = loc.substring(loc.indexOf(','), loc.length());
+				locationHistogram.put("[" + x + ", " + y + "]", top10LocFreq.get(ndx));
+				ndx += 1;
+			}
+			System.out.println("Histogram of Moves: " + locationHistogram.toString(2));
+
+			JSONObject specialMoveHistogram = new JSONObject();
+			specialMoveHistogram.put("Rotate", actionStats.rotateCount);
+			specialMoveHistogram.put("Shuffle", actionStats.shuffleCount);
+			specialMoveHistogram.put("Clear", actionStats.clearCount);
+			specialMoveHistogram.put("Invert", actionStats.invertCount);
+
+			System.out.println("Historgram of Special Moves: " + specialMoveHistogram.toString(2));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 	public static JSONObject resultJSON(ArrayList<Integer> moveHistogram, ArrayList<String> top10Locations, ArrayList<Integer> top10LocFreq) {
 
@@ -452,7 +518,9 @@ class beFuddledStats {
 						JSONObject result = resultJSON(moveHistogram, top10Locations, top10LocFreq);
 						writer.write(result.toString(2));
 					}
-
+					else {
+						printResults(moveHistogram, top10Locations, top10LocFreq);
+					}
 					
 
 				}
